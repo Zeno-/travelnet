@@ -61,5 +61,10 @@ travelnet.allow_travel = function( player_name, owner_name, network_name, statio
    --    " on network "..tostring( network_name ).." owned by "..tostring( owner_name ).." in order to travel to "..
    --    tostring( station_name_target )..".");
 
-   return true;
+	if not minetest.get_player_privs(player_name).interact then
+		minetest.chat_send_player(player_name, "Insufficient privileges", true)
+		return  false
+	end
+
+	return true;
 end
